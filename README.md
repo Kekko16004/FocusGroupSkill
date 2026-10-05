@@ -1,4 +1,4 @@
-# focusgroup
+# FocusGroupSkill
 
 A lightweight agent skill and slash command (`/focusgroup`) to simulate a focus group of distinct fictional personas who evaluate, test, and debate a prototype, web/mobile app, game, or user interface.
 

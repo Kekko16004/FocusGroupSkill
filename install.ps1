@@ -143,7 +143,7 @@ if ($All) {
 if ($selected.Count -eq 0) {
     Clear-Host
     Write-Host "============================================================"
-    Write-Host "Focusgroup Skill Installer"
+    Write-Host "FocusGroupSkill Installer"
     Write-Host "============================================================"
     Write-Host "Seleziona gli ambienti di destinazione:`n"
     Write-Host "  [1] Claude Code       (~/.claude)"
