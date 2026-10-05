@@ -1,165 +1,160 @@
 ---
 name: focusgroup
 description: >-
-  Simula un piccolo focus group di personas diverse (con nome e personalità) che valutano e discutono tra loro un prototipo, poi produce un resoconto finale. Usa questa skill ogni volta che l'utente usa il comando /focusgroup, oppure vuole feedback, opinioni, playtest simulato, test di usabilità o "far provare" a delle persone un'app, un sito, un gioco (Unity, Unreal, Godot o altro), una UI, uno screenshot, un trailer, un'idea di gioco o di prodotto. Attivala anche con richieste tipo "cosa ne penserebbero gli utenti", "fammi un focus group", "panel di tester", "simula dei giocatori", "dimmi cosa è poco chiaro", "feedback su estetica e UX", "play test", anche se l'utente non dice "focus group". Versione leggera: niente tool esterni, niente sottoagenti, tutto in una conversazione.
+  Simulates a focus group of diverse fictional personas (each with distinct names, backgrounds, and personalities) who evaluate and debate a prototype, app, or game, followed by a structured developer report. Use this skill whenever the user invokes /focusgroup, or requests simulated playtesting, UX/UI feedback, user impressions, or usability testing for apps, websites, games (Unity, Unreal, Godot, etc.), screenshots, mockups, or product concepts. Activates on queries like "what would users think", "run a focus group", "tester panel", "simulate players", "identify usability issues", "feedback on aesthetics and UX", even without explicitly mentioning "focus group". Lightweight: no external tools, no sub-agents, fully conversational.
 ---
 
 # Focusgroup (/focusgroup)
 
-Un focus group simulato, leggero e senza setup. Crei un gruppo di persone fittizie con personalità molto diverse, le fai reagire al prototipo, le fai discutere tra loro e alla fine consegni un resoconto onesto e utile.
+A lightweight, zero-setup simulated focus group. Assembles a panel of fictional personas with contrasting backgrounds and personalities, records their initial reactions, orchestrates a group debate, and delivers a concrete, actionable report.
 
-## Comando `/focusgroup`
+## Command `/focusgroup`
 
-Puoi invocare questa skill in qualsiasi momento tramite il comando dedicato:
+Invoke this skill directly via the command:
+```text
+/focusgroup [target or specific focus]
 ```
-/focusgroup [cosa valutare o focus specifico]
-```
-- `/focusgroup`: avvia il panel analizzando il contesto/schermo o ponendo le 4 domande di Fase 1.
-- `/focusgroup UI del menu`: concentra l'attenzione del gruppo su un componente o schermata specifica.
-- `/focusgroup gameplay loop e difficoltà`: orienta casting e discussione sul feel del gioco.
+- `/focusgroup`: launches the panel by analyzing available workspace context/screens or asking Phase 1 questions.
+- `/focusgroup main menu navigation`: focuses the group on a specific component or user flow.
+- `/focusgroup combat pacing and difficulty curve`: directs casting and discussion toward gameplay feel.
 
-**Tono**: rilassato, un po' vivace, come ascoltare un gruppo di amici che prova qualcosa. Ma il resoconto finale deve essere concreto e utilizzabile.
+**Tone**: Relaxed and lively, like observing an honest playtest session among peers. The final summary must remain structured, rigorous, and actionable.
 
-**Lingua**: usa la lingua dell'utente, anche per i dialoghi dei personaggi.
+**Language**: Match the user's preferred language, including character dialogues.
 
 ---
 
-## Fase 1 — Capire cosa si valuta (max 1 giro di domande)
+## Phase 1 — Context Intake (Max 1 Question Round)
 
-Prima di tutto controlla cosa hai già: messaggio, file, screenshot, codice, link, descrizione. Non chiedere ciò che puoi dedurre.
+First, inspect available context: prompt details, open files, screenshots, repository code, links, and descriptions. Do not ask for information that can be directly inferred.
 
-Poi chiedi in **un solo messaggio** (massimo 4 domande, brevi) solo ciò che manca:
+If essential context is missing, ask in **a single message** (maximum 4 short questions):
 
-1. **Cosa devo valutare?** (se non è chiaro: app mobile, sito/web app, gioco, tool desktop, solo un'idea/concept, ecc.)
-2. **Categoria / genere** se è un gioco (platformer, roguelike, horror, puzzle, FPS, gestionale, narrativo, ecc.) o tipo di app (produttività, social, e-commerce, utility, ecc.). **Se la categoria non è chiara, chiedila sempre**: da questa dipende il casting.
-3. **Quante persone vuoi nel gruppo?** Proponi un default: 6 (range sensato 3-10; oltre 10 le voci diventano ripetitive).
-4. **Su cosa vuoi che si concentrino?** (estetica, chiarezza/onboarding, gameplay feel, difficoltà, UX, monetizzazione, performance percepita, tutto). Default: tutto.
+1. **What is being evaluated?** (Mobile app, website/web app, game, desktop tool, raw concept, etc.)
+2. **Category / Genre**: Game genre (platformer, roguelike, horror, puzzle, FPS, simulation, narrative, etc.) or app type (productivity, social, e-commerce, utility, etc.). **Always confirm category if ambiguous**, as casting depends on it.
+3. **Group size**: Default to 6 personas (sensible range: 3-10; larger panels become repetitive).
+4. **Primary focus**: Aesthetics, onboarding/clarity, gameplay feel, difficulty, UX, monetization, perceived performance, or everything (default).
 
-Facoltativo, solo se utile: target previsto (età, pubblico), piattaforma, a che punto è il prototipo (idea, mockup, build giocabile).
+Optional (only if relevant): target demographic, platform, prototype fidelity (concept, wireframe, playable build).
 
-Se l'utente ha già risposto a tutto, salta direttamente alla Fase 2.
+If the user has already provided sufficient information, skip directly to Phase 2.
 
-### Cosa possono davvero "vedere" i personaggi
+### What Personas Can Observe
 
-Stabilisci subito il materiale disponibile e dillo in una riga:
-- **Screenshot/immagini**: possono giudicare estetica, layout, leggibilità, gerarchia visiva.
-- **Codice/progetto**: possono giudicare struttura, scelte tecniche, cose dedotte dalla UI nel codice. Non possono "giocare" davvero.
-- **Solo testo/descrizione**: reagiscono al concept, non all'esperienza reale.
-- **Video/trailer**: solo se riesci davvero a vederlo; altrimenti non fingere.
+Clarify the available evidence upfront:
+- **Screenshots / Images**: Visual aesthetics, layout, legibility, and visual hierarchy.
+- **Code / Architecture**: Implementation structure, technical choices, and UI wiring inferred from code (cannot simulate runtime feel).
+- **Text / Concept**: Conceptual reaction to the pitch, not lived interaction.
+- **Video / Media**: Visual flow and pacing, only if directly viewable.
 
-**Regola d'oro: nessuno inventa feature, schermate o comportamenti che non conosce.** Se un personaggio non ha abbastanza info, lo dice ("da qui non capisco cosa succede dopo il tap") e questo conta come feedback utile.
-
----
-
-## Fase 2 — Casting
-
-Crea il gruppo. Ogni persona ha:
-
-- **Nome** (vario per origine e genere, non stereotipato)
-- **Età e ruolo/background** in mezza riga
-- **Livello di competenza** (principiante, medio, esperto)
-- **Gusti e cosa le importa** (es. "odia i tutorial lunghi", "guarda solo la grafica", "gioca solo souls-like")
-- **Un tratto di carattere** (scettico, entusiasta, pignolo, distratto, diretto, ironico...)
-- **Modo di parlare** (breve e secco, prolisso, tecnico, slang...)
-
-### Regole di diversità (sempre)
-
-- Almeno **un principiante assoluto** che non conosce il genere.
-- Almeno **uno scettico/critico** che cerca i difetti.
-- Almeno **un esperto** del settore o del genere.
-- Almeno **uno impaziente/distratto** (abbandona al primo attrito).
-- Se il gruppo è ≥ 6: aggiungi **un profilo accessibilità** (daltonismo, schermo piccolo, mano sola, poca vista, ecc.) e **un contrarian** che tende a non essere d'accordo con la maggioranza.
-- Niente gruppo di soli entusiasti. Personalità e opinioni devono poter **scontrarsi**.
-
-### Archetipi per categoria (scegli e mescola, non sono obbligatori)
-
-**App / siti / tool**
-- Utente base (poco tecnico), utente frettoloso, UX designer, UI/visual designer, sviluppatore frontend, persona over 60, power user, professionista del settore specifico dell'app, utente con schermo piccolo/connessione lenta, esperto di accessibilità, product manager scettico.
-
-**Giochi (qualsiasi motore: Unity, Unreal, Godot, altro)**
-- Giocatore casual, giocatore hardcore del genere specifico, critico/recensore di videogiochi, completionist, speedrunner, streamer/content creator (guarda "quanto è clippabile/vendibile"), game designer, level/UI designer, artista/animatore, giocatore da mobile, giocatore da PC/console esigente, genitore che sceglie il gioco per il figlio, appassionato di indie, giocatore con disabilità motoria o visiva.
-- Per i giochi, se hai accesso a codice/build: aggiungi uno **sviluppatore indie** che commenta anche performance percepita, controlli, scelte di scope. Non attribuire problemi a uno specifico motore senza evidenza concreta.
-
-**Concept / idee non ancora realizzate**
-- Mix di target potenziale, investitore/publisher scettico, esperto di mercato, "amico onesto".
-
-Mostra all'utente il cast in una **tabella compatta** (nome, profilo, tratto) e continua senza aspettare conferma, a meno che l'utente abbia chiesto di approvarlo prima.
+**Rule**: Personas never invent unseen features or behaviors. If details are missing, personas explicitly state their uncertainty (e.g., "It is unclear what happens after tapping this button"), which serves as valid feedback.
 
 ---
 
-## Fase 3 — Prime impressioni (ognuno per conto suo)
+## Phase 2 — Casting
 
-Ogni personaggio reagisce **indipendentemente**, senza aver ancora sentito gli altri. Per ciascuno: 3-5 righe nella sua voce, con almeno un'osservazione su ciascuno di questi temi (se pertinente al focus scelto):
+Construct the persona panel. Each persona includes:
 
-- **Estetica**: stile, coerenza, colori, tipografia, atmosfera
-- **Cosa è chiaro / piace**
-- **Cosa non è chiaro / confonde**
-- **Cosa non funziona o frustra**
-- **Cosa cambierebbe**
+- **Name**: Culturally diverse, non-stereotypical names.
+- **Age and Role / Background**: Stated in half a line.
+- **Competence Level**: Beginner, Intermediate, Expert.
+- **Preferences and Priorities**: Specific inclinations (e.g., "skips long tutorials", "prioritizes typography", "plays only souls-likes").
+- **Personality Trait**: Skeptical, enthusiastic, meticulous, impatient, blunt, analytical, etc.
+- **Speaking Style**: Concise, verbose, technical, colloquial, direct, etc.
 
-Punti di attenzione:
-- Ogni personaggio guarda con **i propri occhi e i propri gusti**: lo stesso elemento può piacere a uno e infastidire un altro.
-- Le reazioni devono essere **specifiche** ("il bottone in basso a destra sembra disabilitato") e non generiche ("bella UI").
-- Evita il bias tipico dei modelli: troppo positivi e troppo educati. Se un elemento è davvero debole, almeno qualcuno lo dice senza giri di parole.
+### Mandatory Diversity Rules
 
----
+- At least **one complete novice** unfamiliar with the genre or domain.
+- At least **one skeptical critic** actively searching for design flaws.
+- At least **one domain expert** or genre veteran.
+- At least **one impatient/distracted user** who drops off at early friction.
+- For panels with 6 or more members: include **one accessibility profile** (color vision deficiency, low vision, small display, one-handed use, motor constraint) and **one contrarian** prone to challenging group consensus.
+- Avoid universally agreeable panels. Personas must hold conflicting viewpoints.
 
-## Fase 4 — Discussione tra loro
+### Domain Archetypes (Reference Guidelines)
 
-Qui i personaggi **comunicano tra loro**. Scrivi la conversazione come una chat di gruppo, in 2 round brevi:
+**Apps / Websites / Tools**
+- Casual user (low tech proficiency), rushed power user, UX designer, visual/UI designer, frontend engineer, senior user (60+), domain specialist, slow network/small screen user, accessibility auditor, skeptical product manager.
 
-**Round 1 — Confronto**: reagiscono alle osservazioni degli altri. Si danno ragione, si contraddicono, chiedono chiarimenti ("ma tu come hai fatto a capire che quello era cliccabile?"), portano esempi di altri prodotti.
+**Games (Unity, Unreal, Godot, Web, Mobile)**
+- Casual player, hardcore genre purist, game reviewer, completionist, speedrunner, content creator/streamer (focuses on viewer engagement/clip potential), systems designer, level/UI artist, mobile-first player, accessibility advocate.
+- For code/build access: include an **indie developer persona** commenting on scope, feel, and performance without attributing flaws to engines without concrete evidence.
 
-**Round 2 — Approfondimento**: si concentrano sui 2-3 punti più divisivi o più importanti emersi e provano a capire il perché, cercando una posizione comune o motivando perché non c'è.
+**Concepts / Pitches**
+- Target audience members, cynical publisher/investor, industry analyst, pragmatic peer reviewer.
 
-Regole della discussione:
-- Formato: `**Nome:** battuta` una per riga. Battute brevi, naturali.
-- Ognuno mantiene **voce, gusti e competenza** del proprio profilo; nessuno cambia idea solo per cortesia. Se cambia idea, deve esserci un motivo detto ad alta voce.
-- Non far parlare tutti in ogni scambio: come in una chat vera, qualcuno interviene di più, qualcuno poco.
-- Niente moderatore, niente riassunti dentro la discussione: quelli vanno nel resoconto.
-- Un tocco di umorismo va bene, purché non copra il contenuto.
-
-Lunghezza: modalità **rapida** (default) ~10-16 battute totali; modalità **approfondita** (se l'utente la chiede) ~25-35 battute con un terzo round.
-
----
-
-## Fase 5 — Resoconto finale
-
-Chiudi con un resoconto strutturato, **senza dialoghi**, pensato per essere letto da chi sviluppa:
-
-1. **Verdetto in breve** (2-3 frasi): come è stato accolto nel complesso e dove si è spaccato il gruppo.
-2. **Cosa funziona**: elementi apprezzati, con quanti personaggi su N e di che tipo (es. "5/6, anche gli scettici").
-3. **Cosa non è chiaro**: punti di confusione, ordinati per frequenza e gravità.
-4. **Estetica**: sintesi delle impressioni visive, evidenziando dove i gusti divergono e perché.
-5. **Problemi principali**, in tabella: problema · chi l'ha sollevato · gravità (alta/media/bassa) · suggerimento.
-6. **Punti divisivi**: dove le opinioni sono opposte e da cosa dipende (target, esperienza, gusto).
-7. **Quick win**: 3-5 modifiche piccole con il miglior rapporto effetto/sforzo.
-8. **Domande aperte per chi sviluppa**: cose che i personaggi non hanno potuto giudicare o che dovrebbero essere testate con persone reali.
-9. *(Opzionale)* **Voto di ogni personaggio** da 1 a 10 con una riga di motivazione.
-
-### Onestà obbligatoria
-
-Chiudi sempre con una breve nota: questa è una **simulazione basata su un modello linguistico**, non ricerca su utenti reali. Serve a far emergere ipotesi, punti ciechi e problemi probabili in fretta, ma va confermata con almeno 3-5 persone vere, soprattutto per decisioni importanti. Non presentare mai percentuali o numeri come se fossero statistiche: sono impressioni di un gruppo fittizio.
+Output the cast in a **compact Markdown table** (Name, Background, Primary Trait) and proceed immediately unless the user asked to pre-approve the roster.
 
 ---
 
-## Dopo il resoconto
+## Phase 3 — Independent First Impressions
 
-Offri (in una riga) le mosse successive più utili, per esempio:
-- rifare il panel con **altro tipo di pubblico** o un cast diverso
-- **ri-testare dopo le modifiche** con le stesse persone (mantieni nomi e profili per la continuità)
-- **approfondire un punto** con 2-3 personaggi in mini-discussione
-- salvare il resoconto in un file `.md`
+Each persona reacts **independently** before hearing other panelists. For each persona: 3-5 lines in their distinct voice covering relevant aspects:
 
-Se l'utente vuole ripetere il test, **riusa lo stesso cast** salvo diversa richiesta, così si vede se i problemi sono stati risolti.
+- **Aesthetics**: Style, visual coherence, palette, typography, visual atmosphere.
+- **Strengths**: What is immediately clear, effective, or appealing.
+- **Confusion**: What feels ambiguous, disorienting, or poorly signaled.
+- **Friction**: What hinders progress, frustrates, or breaks expectations.
+- **Proposed Change**: Their single highest-priority modification.
+
+Guidelines:
+- Reactions must be **grounded and specific** (e.g., "the primary CTA button lacks contrast against the background") rather than vague praise ("looks clean").
+- Avoid generic model sycophancy: flawed elements must receive direct critique.
 
 ---
 
-## Principi generali
+## Phase 4 — Group Debate
 
-- **Leggero**: niente ricerca web, niente strumenti, niente file di setup. Si chiede il minimo, si parte.
-- **Diversità vera**: se due personaggi dicono la stessa cosa con parole diverse, il cast è sbagliato.
-- **Specificità**: ogni critica deve puntare a qualcosa di preciso nel materiale.
-- **Niente adulazione**: un panel che approva tutto è inutile.
-- **Niente invenzioni**: se manca informazione, si dichiara.
-- **Rispetto**: i personaggi possono essere duri con il prodotto, mai offensivi o stereotipati verso gruppi di persone.
+Personas engage in conversational discussion structured across two brief rounds:
+
+**Round 1 — Cross-Examination**: Personas react to each other's impressions, validate or contest observations, request clarification ("How did you discover that was interactive?"), and cite competing benchmarks.
+
+**Round 2 — Deep Dive**: The group focuses on the 2-3 most contentious or critical issues, attempting to find common ground or explaining why their perspectives fundamentally diverge.
+
+Debate Rules:
+- Format: `**Name:** dialogue line` (one per line, concise and natural).
+- Each persona retains their individual voice, competence, and biases. Nobody concedes a point out of politeness without stated rationale.
+- Dynamic participation: some personas speak more frequently than others; avoid uniform round-robin ordering.
+- No narrator or inline summaries during the chat; synthesis belongs in Phase 5.
+- Scope: standard rapid mode ~10-16 total lines; in-depth mode (if requested) ~25-35 lines across three rounds.
+
+---
+
+## Phase 5 — Structured Final Report
+
+Conclude with an executive summary, **free of persona dialogue**, formatted for developers and designers:
+
+1. **Executive Verdict** (2-3 sentences): Overall reception and primary fault lines.
+2. **Validated Strengths**: Well-received aspects, noting persona consensus (e.g., "5/6 personas, including critics").
+3. **Usability & Clarity Issues**: Points of confusion ranked by frequency and severity.
+4. **Visual & Aesthetic Feedback**: Synthesis of design critique, highlighting subjective taste divergence.
+5. **Issue Matrix** (Markdown Table): Issue description | Identified by | Severity (High / Medium / Low) | Actionable Recommendation.
+6. **Divisive Topics**: Areas of direct disagreement and the underlying persona drivers (experience, target demographic, expectations).
+7. **Quick Wins**: 3-5 high-impact, low-effort adjustments.
+8. **Open Questions**: Assumptions that could not be validated and require live human testing.
+9. *(Optional)* **Individual Scores**: 1 to 10 ratings with a one-sentence rationale per persona.
+
+### Simulation Disclaimer
+
+Always include a concluding note: this assessment is an **LLM-based persona simulation**, not empirical human user research. It accelerates heuristic discovery and exposes blind spots, but critical decisions must be validated with representative real-world users. Avoid presenting persona feedback as statistical quantitative data.
+
+---
+
+## Next Steps
+
+Offer logical follow-up actions:
+- Re-run the panel with a **different target demographic** or alternate persona roster.
+- **Re-test after revisions** using the same cast for consistency.
+- **Deep-dive on a specific issue** with a focused mini-debate between 2-3 characters.
+- Export or persist the final report to a markdown document.
+
+---
+
+## Core Principles
+
+- **Zero overhead**: No dependencies, scrapers, or setup tasks. Inspect, cast, and run.
+- **Authentic divergence**: If two personas share the same viewpoint using different wording, re-balance the cast.
+- **Evidence-based feedback**: Ground every critique in observable elements of the submission.
+- **No unearned flattery**: An agreeable focus group provides zero engineering value.
+- **Explicit uncertainty**: Missing information must be flagged rather than fabricated.
+- **Constructive professionalism**: Personas may be uncompromising regarding product flaws, but remain respectful and non-derogatory.

@@ -1,9 +1,9 @@
 ---
-description: Simula un focus group di personas diverse per valutare e discutere un prototipo, app, gioco o UI
-argument-hint: "[cosa valutare o focus specifico]"
+description: Simulate a focus group of diverse personas to evaluate and debate a prototype, app, game, or UI
+argument-hint: "[target or specific focus]"
 ---
 
 Load the `focusgroup` skill and run its evaluation pipeline for: $ARGUMENTS
 
-1. Controlla il contesto del workspace, file aperti, codice o schermate. Se $ARGUMENTS specifica cosa valutare o un focus particolare, impostalo subito senza domande ridondanti in Fase 1.
-2. Esegui le Fasi da 1 a 5 della skill focusgroup: casting del panel eterogeneo, prime impressioni indipendenti, discussione/dibattito in chat tra i personaggi e resoconto finale strutturato per lo sviluppatore.
+1. Inspect workspace context, open files, code, or screenshots. If $ARGUMENTS specifies what to evaluate or a specific focus, apply it immediately without redundant questions in Phase 1.
+2. Execute Phases 1 through 5 of the focusgroup skill: persona casting, independent impressions, multi-round group debate, and structured developer report.

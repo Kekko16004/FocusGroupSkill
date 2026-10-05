@@ -1,4 +1,4 @@
-# Focusgroup Skill Installer
+# FocusGroupSkill Installer
 # Compatible with Windows PowerShell 5.1+ and PowerShell 7+
 [CmdletBinding()]
 param(
@@ -20,7 +20,7 @@ $CmdSource = Join-Path $SourceDir "commands\focusgroup.md"
 $SkillFile = Join-Path $SourceDir "SKILL.md"
 
 if (-not (Test-Path -LiteralPath $SkillFile)) {
-    Write-Error "SKILL.md non trovato in $SourceDir"
+    Write-Error "SKILL.md not found in $SourceDir"
     exit 1
 }
 
@@ -71,7 +71,7 @@ function Remove-ExistingPath([string]$Path) {
 
 function Install-Target([string]$Key) {
     $conf = $Targets[$Key]
-    Write-Host "[+] Configurazione: $($conf.Label)"
+    Write-Host "[+] Configuring: $($conf.Label)"
 
     foreach ($skillPath in $conf.Skills) {
         $parent = Split-Path -Path $skillPath -Parent
@@ -84,12 +84,12 @@ function Install-Target([string]$Key) {
                 New-Item -ItemType Junction -Path $skillPath -Target $SourceDir | Out-Null
                 Write-Host "    Link: $skillPath -> $SourceDir"
             } catch {
-                Write-Host "    Fallback su copia per: $skillPath"
+                Write-Host "    Fallback to copy for: $skillPath"
                 Copy-Item -Path $SourceDir -Destination $skillPath -Recurse -Force
             }
         } else {
             Copy-Item -Path $SourceDir -Destination $skillPath -Recurse -Force
-            Write-Host "    Copia: $skillPath"
+            Write-Host "    Copy: $skillPath"
         }
     }
 
@@ -100,24 +100,24 @@ function Install-Target([string]$Key) {
                 New-Item -ItemType Directory -Path $parent -Force | Out-Null
             }
             Copy-Item -Path $CmdSource -Destination $cmdPath -Force
-            Write-Host "    Comando: $cmdPath"
+            Write-Host "    Command: $cmdPath"
         }
     }
 }
 
 function Uninstall-Target([string]$Key) {
     $conf = $Targets[$Key]
-    Write-Host "[-] Rimozione da: $($conf.Label)"
+    Write-Host "[-] Removing from: $($conf.Label)"
     foreach ($skillPath in $conf.Skills) {
         if (Test-Path -LiteralPath $skillPath) {
             Remove-ExistingPath $skillPath
-            Write-Host "    Rimosso skill: $skillPath"
+            Write-Host "    Removed skill: $skillPath"
         }
     }
     foreach ($cmdPath in $conf.Commands) {
         if (Test-Path -LiteralPath $cmdPath) {
             Remove-Item -LiteralPath $cmdPath -Force
-            Write-Host "    Rimosso comando: $cmdPath"
+            Write-Host "    Removed command: $cmdPath"
         }
     }
 }
@@ -126,7 +126,7 @@ if ($Uninstall) {
     foreach ($key in $Targets.Keys) {
         Uninstall-Target $key
     }
-    Write-Host "`nDisinstallazione completata."
+    Write-Host "`nUninstallation completed."
     exit 0
 }
 
@@ -145,16 +145,16 @@ if ($selected.Count -eq 0) {
     Write-Host "============================================================"
     Write-Host "FocusGroupSkill Installer"
     Write-Host "============================================================"
-    Write-Host "Seleziona gli ambienti di destinazione:`n"
+    Write-Host "Select target environments:`n"
     Write-Host "  [1] Claude Code       (~/.claude)"
     Write-Host "  [2] Antigravity IDE   (~/.gemini/config)"
     Write-Host "  [3] Kilo / Kilocode   (~/.kilo, ~/.config/kilo, ~/.kilocode)"
     Write-Host "  [4] Agents Hub        (~/.agents)"
-    Write-Host "  [5] Tutti gli ambienti (Consigliato)"
-    Write-Host "  [6] Disinstalla da tutti gli ambienti"
-    Write-Host "  [0] Esci"
+    Write-Host "  [5] All environments (Recommended)"
+    Write-Host "  [6] Uninstall from all environments"
+    Write-Host "  [0] Exit"
     Write-Host "============================================================"
-    $choice = Read-Host "Scelta [0-6]"
+    $choice = Read-Host "Choice [0-6]"
 
     switch ($choice) {
         "1" { $selected = @("claude") }
@@ -164,24 +164,24 @@ if ($selected.Count -eq 0) {
         "5" { $selected = @("claude", "antigravity", "kilo", "agents") }
         "6" {
             foreach ($k in $Targets.Keys) { Uninstall-Target $k }
-            Write-Host "`nDisinstallazione completata."
+            Write-Host "`nUninstallation completed."
             exit 0
         }
         "0" {
-            Write-Host "Operazione annullata."
+            Write-Host "Operation cancelled."
             exit 0
         }
         default {
-            Write-Host "Scelta non valida."
+            Write-Host "Invalid choice."
             exit 1
         }
     }
 }
 
-Write-Host "`nAvvio installazione...`n"
+Write-Host "`nStarting installation...`n"
 foreach ($key in $selected) {
     Install-Target $key
 }
 
-Write-Host "`nInstallazione completata con successo."
-Write-Host "Comando disponibile: /focusgroup"
+Write-Host "`nInstallation completed successfully."
+Write-Host "Command available: /focusgroup"
