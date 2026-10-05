@@ -1,0 +1,10 @@
+# Runtime agent context
+.ai_context/
+
+# OS files
+Thumbs.db
+Desktop.ini
+
+# Temporary files
+*.tmp
+*.log
