@@ -1,39 +1,39 @@
 # focusgroup
 
-Skill e comando slash (`/focusgroup`) per simulare un focus group di personas fittizie con background, preferenze e competenze eterogenei che valutano e discutono un prototipo, un'applicazione web o mobile, un videogioco o un'interfaccia utente.
+A lightweight agent skill and slash command (`/focusgroup`) to simulate a focus group of distinct fictional personas who evaluate, test, and debate a prototype, web/mobile app, game, or user interface.
 
-## Caratteristiche
+## Features
 
-- **Zero dipendenze esterne**: logica interamente conversazionale, nessun tool o sottoagente richiesto.
-- **Casting contestuale**: composizione automatica del gruppo in base al dominio (app, web, videogame Unity/Unreal/Godot, concept iniziale).
-- **Prospettive contrapposte**: inclusione forzata di profili principianti, esperti del genere, scettici, utenti frettolosi ed esigenze di accessibilita per evitare risposte compiacenti.
-- **Pipeline in 5 fasi**:
-  1. *Comprensione del contesto*: deduzione diretta dal workspace o massimo un singolo round di chiarimenti.
-  2. *Casting*: definizione di nome, background, competenza, gusti e tratti caratteriali.
-  3. *Prime impressioni*: reazioni indipendenti su estetica, chiarezza, frizioni e modifiche prioritarie.
-  4. *Dibattito*: chat tra personas articolata su due round (confronto e approfondimento punti divisivi).
-  5. *Resoconto tecnico*: sintesi per chi sviluppa con tabella problemi/gravita, quick win e verifiche su utenti reali.
+- **Zero dependencies**: Purely conversational workflow without external tools, background processes, or sub-agents.
+- **Context-aware casting**: Automatically populates persona profiles matched to the target domain (SaaS apps, websites, game engines like Unity/Unreal/Godot, or early concepts).
+- **Mandatory persona diversity**: Enforces conflicting perspectives by including beginners, genre veterans, skeptics, impatient users, and accessibility-focused profiles to prevent agreeable model bias.
+- **5-Phase pipeline**:
+  1. *Context intake*: Infers domain from current workspace or asks at most one concise round of questions.
+  2. *Casting*: Generates distinct names, backgrounds, skill levels, preferences, and communication styles.
+  3. *Independent impressions*: Individual reviews covering aesthetics, clarity, friction points, and requested changes.
+  4. *Group debate*: Simulated multi-round conversation where personas compare notes and drill down on divisive points.
+  5. *Structured report*: Developer-oriented summary featuring an issue/severity matrix, quick wins, and validation notes.
 
-## Ambienti supportati
+## Supported Environments
 
 - Claude Code (`~/.claude`)
 - Antigravity IDE (`~/.gemini/config`)
 - Kilo / Kilocode (`~/.kilo`, `~/.config/kilo`, `~/.kilocode`)
 - Agents Hub (`~/.agents/skills`)
 
-## Installazione (Windows)
+## Installation (Windows)
 
-### Modalita interattiva
-Eseguire il file `install.bat`:
+### Interactive Installer
+Run `install.bat` from the repository root:
 ```cmd
 install.bat
 ```
-Il menu consente di selezionare la piattaforma specifica o eseguire l'installazione globale (`[5] Tutti gli ambienti`).
+The menu allows selecting a specific host environment or deploying to all supported platforms (`[5] All environments`).
 
-L'installer crea una giunzione NTFS verso il repository locale. In questo modo le modifiche apportate ai file sorgente sono immediatamente attive in tutti gli ambienti senza reinstallare.
+The installer provisions NTFS directory junctions pointing directly to this repository. Local source edits are reflected immediately across all environments without reinstallation.
 
-### Parametri riga di comando
-Installazione automatica senza prompt interattivo:
+### CLI Parameters
+Automated installation without interactive prompts:
 ```cmd
 install.bat -All
 install.bat -Claude
@@ -42,49 +42,49 @@ install.bat -Kilo
 install.bat -Uninstall
 ```
 
-Esecuzione diretta tramite PowerShell:
+PowerShell execution:
 ```powershell
 .\install.ps1 -All
 ```
 
-Per forzare la copia fisica dei file anziche il link simbolico:
+To force standalone folder copies instead of NTFS junctions:
 ```powershell
 .\install.ps1 -All -Mode copy
 ```
 
-## Utilizzo
+## Usage
 
-### Comando slash
+### Slash Command
 ```text
-/focusgroup [cosa valutare o focus specifico]
+/focusgroup [optional target or specific focus]
 ```
 
-Esempi:
+Examples:
 ```text
 /focusgroup
-/focusgroup UI del menu principale e leggibilita testi
-/focusgroup difficolta tutorial e tempo di apprendimento
+/focusgroup main menu navigation and text hierarchy
+/focusgroup combat pacing and tutorial difficulty
 ```
 
-### Attivazione in linguaggio naturale
-La skill risponde a istruzioni quali:
-- "Simula un focus group per questa schermata"
-- "Fammi un playtest con tester fittizi di diverso tipo"
-- "Cosa penserebbe un principiante rispetto a un giocatore esperto?"
-- "Analizza usabilita ed estetica con un panel di persone"
+### Natural Language Invocation
+The skill triggers automatically on user prompts such as:
+- "Simulate a focus group for this dashboard"
+- "Run a simulated playtest with diverse player types"
+- "What would novice and veteran users think of this onboarding flow?"
+- "Evaluate aesthetics and usability with a panel of tester personas"
 
-## Struttura del repository
+## Repository Structure
 
 ```text
 .
-|-- SKILL.md                 # Specifica tecnica della skill
+|-- SKILL.md                 # Full skill specifications and prompt guidelines
 |-- commands/
-|   `-- focusgroup.md        # Definizione comando slash per gli host compatibili
-|-- install.bat              # Launcher batch Windows
-|-- install.ps1              # Script di installazione e linking
-`-- README.md                # Documentazione
+|   `-- focusgroup.md        # Host command declaration for /focusgroup
+|-- install.bat              # Windows batch runner
+|-- install.ps1              # Deployment script (junction/copy engine)
+`-- README.md                # Documentation
 ```
 
-## Licenza
+## License
 
 MIT
