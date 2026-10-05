@@ -58,6 +58,8 @@ $Targets = [ordered]@{
     }
 }
 
+$LegacyNames = @("focus-panel", "focus_panel")
+
 function Remove-ExistingPath([string]$Path) {
     if (Test-Path -LiteralPath $Path) {
         $item = Get-Item -LiteralPath $Path -Force
@@ -78,18 +80,22 @@ function Install-Target([string]$Key) {
         if (-not (Test-Path -LiteralPath $parent)) {
             New-Item -ItemType Directory -Path $parent -Force | Out-Null
         }
+        foreach ($legacy in $LegacyNames) {
+            $legacySkill = $skillPath -replace [regex]::Escape($SkillName), $legacy
+            Remove-ExistingPath $legacySkill
+        }
         Remove-ExistingPath $skillPath
         if ($Mode -eq "link") {
             try {
                 New-Item -ItemType Junction -Path $skillPath -Target $SourceDir | Out-Null
-                Write-Host "    Link: $skillPath -> $SourceDir"
+                Write-Host "    Link (updated): $skillPath -> $SourceDir"
             } catch {
                 Write-Host "    Fallback to copy for: $skillPath"
                 Copy-Item -Path $SourceDir -Destination $skillPath -Recurse -Force
             }
         } else {
             Copy-Item -Path $SourceDir -Destination $skillPath -Recurse -Force
-            Write-Host "    Copy: $skillPath"
+            Write-Host "    Copy (updated): $skillPath"
         }
     }
 
@@ -99,8 +105,15 @@ function Install-Target([string]$Key) {
             if (-not (Test-Path -LiteralPath $parent)) {
                 New-Item -ItemType Directory -Path $parent -Force | Out-Null
             }
+            foreach ($legacy in $LegacyNames) {
+                $legacyCmd = $cmdPath -replace [regex]::Escape($SkillName), $legacy
+                if (Test-Path -LiteralPath $legacyCmd) {
+                    Remove-Item -LiteralPath $legacyCmd -Force
+                    Write-Host "    Cleaned legacy command: $legacyCmd"
+                }
+            }
             Copy-Item -Path $CmdSource -Destination $cmdPath -Force
-            Write-Host "    Command: $cmdPath"
+            Write-Host "    Command (updated): $cmdPath"
         }
     }
 }
