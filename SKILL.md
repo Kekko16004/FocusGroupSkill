@@ -1,6 +1,7 @@
 ---
 name: focusgroup
-description: Simula un piccolo focus group di personas diverse (con nome e personalità) che valutano e discutono tra loro un prototipo, poi produce un resoconto finale. Usa questa skill ogni volta che l'utente usa il comando /focusgroup, oppure vuole feedback, opinioni, playtest simulato, test di usabilità o "far provare" a delle persone un'app, un sito, un gioco (Unity, Unreal, Godot o altro), una UI, uno screenshot, un trailer, un'idea di gioco o di prodotto. Attivala anche con richieste tipo "cosa ne penserebbero gli utenti", "fammi un focus group", "panel di tester", "simula dei giocatori", "dimmi cosa è poco chiaro", "feedback su estetica e UX", "play test", anche se l'utente non dice "focus group". Versione leggera: niente tool esterni, niente sottoagenti, tutto in una conversazione.
+description: >-
+  Simula un piccolo focus group di personas diverse (con nome e personalità) che valutano e discutono tra loro un prototipo, poi produce un resoconto finale. Usa questa skill ogni volta che l'utente usa il comando /focusgroup, oppure vuole feedback, opinioni, playtest simulato, test di usabilità o "far provare" a delle persone un'app, un sito, un gioco (Unity, Unreal, Godot o altro), una UI, uno screenshot, un trailer, un'idea di gioco o di prodotto. Attivala anche con richieste tipo "cosa ne penserebbero gli utenti", "fammi un focus group", "panel di tester", "simula dei giocatori", "dimmi cosa è poco chiaro", "feedback su estetica e UX", "play test", anche se l'utente non dice "focus group". Versione leggera: niente tool esterni, niente sottoagenti, tutto in una conversazione.
 ---
 
 # Focusgroup (/focusgroup)
